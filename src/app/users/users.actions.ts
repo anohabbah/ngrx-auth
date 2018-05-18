@@ -25,7 +25,7 @@ export enum ActionTypes {
  * @class AuthenticateAction
  * @implements {Action}
  */
-export class AuthenticateAction implements Action {
+export class Authenticate implements Action {
   public readonly type: string = ActionTypes.AUTHENTICATE;
 
   constructor(public payload: { email: string, password: string }) {
@@ -37,7 +37,7 @@ export class AuthenticateAction implements Action {
  * @class AuthenticatedAction
  * @implements {Action}
  */
-export class AuthenticatedAction implements Action {
+export class Authenticated implements Action {
   public readonly type: string = ActionTypes.AUTHENTICATED;
 
   constructor(public payload?: { token?: string }) {
@@ -49,22 +49,10 @@ export class AuthenticatedAction implements Action {
  * @class AuthenticatedSuccessAction
  * @implements {Action}
  */
-export class AuthenticatedSuccessAction implements Action {
+export class AuthenticatedSuccess implements Action {
   public readonly type: string = ActionTypes.AUTHENTICATED_SUCCESS;
 
   constructor(public payload: { authenticated: boolean, user: User }) {
-  }
-}
-
-/**
- * Authenticated check error.
- * @class AuthenticatedErrorAction
- * @implements {Action}
- */
-export class AuthenticatedErrorAction implements Action {
-  public readonly type: string = ActionTypes.AUTHENTICATED_ERROR;
-
-  constructor(public payload?: any) {
   }
 }
 
@@ -73,8 +61,20 @@ export class AuthenticatedErrorAction implements Action {
  * @class AuthenticationErrorAction
  * @implements {Action}
  */
-export class AuthenticationErrorAction implements Action {
+export class AuthenticationError implements Action {
   public readonly type: string = ActionTypes.AUTHENTICATE_ERROR;
+
+  constructor(public payload?: any) {
+  }
+}
+
+/**
+ * Authenticated check error.
+ * @class AuthenticatedErrorAction
+ * @implements {Action}
+ */
+export class AuthenticatedError implements Action {
+  public readonly type: string = ActionTypes.AUTHENTICATED_ERROR;
 
   constructor(public payload?: any) {
   }
@@ -85,7 +85,7 @@ export class AuthenticationErrorAction implements Action {
  * @class AuthenticationSuccessAction
  * @implements {Action}
  */
-export class AuthenticationSuccessAction implements Action {
+export class AuthenticationSuccess implements Action {
   public readonly type: string = ActionTypes.AUTHENTICATE_SUCCESS;
 
   constructor(public payload: { user: User }) {
@@ -97,7 +97,7 @@ export class AuthenticationSuccessAction implements Action {
  * @class SignOutAction
  * @implements {Action}
  */
-export class SignOutAction implements Action {
+export class SignOut implements Action {
   public readonly type: string = ActionTypes.SIGN_OUT;
 
   constructor(public payload?: any) {
@@ -109,7 +109,7 @@ export class SignOutAction implements Action {
  * @class SignOutErrorAction
  * @implements {Action}
  */
-export class SignOutErrorAction implements Action {
+export class SignOutError implements Action {
   public readonly type: string = ActionTypes.SIGN_OUT_SUCCESS;
 
   constructor(public payload?: any) {
@@ -121,7 +121,7 @@ export class SignOutErrorAction implements Action {
  * @class SignOutSuccessAction
  * @implements {Action}
  */
-export class SignOutSuccessAction implements Action {
+export class SignOutSuccess implements Action {
   public readonly type: string = ActionTypes.SIGN_OUT_SUCCESS;
 
   constructor(public payload?: any) {
@@ -133,7 +133,7 @@ export class SignOutSuccessAction implements Action {
  * @class SignUpAction
  * @implements {Action}
  */
-export class SignUpAction implements Action {
+export class SignUp implements Action {
   public readonly type: string = ActionTypes.SIGN_UP;
 
   constructor(public payload: { user: User }) {
@@ -145,7 +145,7 @@ export class SignUpAction implements Action {
  * @class SignUpErrorAction
  * @implements {Action}
  */
-export class SignUpErrorAction implements Action {
+export class SignUpError implements Action {
   public readonly type: string = ActionTypes.SIGN_UP_ERROR;
 
   constructor(public payload?: any) {
@@ -157,7 +157,7 @@ export class SignUpErrorAction implements Action {
  * @class SignUpSuccessAction
  * @implements {Action}
  */
-export class SignUpSuccessAction implements Action {
+export class SignUpSuccess implements Action {
   public readonly type: string = ActionTypes.SIGN_UP_SUCCESS;
 
   constructor(public payload: { user: User }) {
@@ -173,12 +173,12 @@ export class LoginRedirect implements Action {
  * @type {Actions}
  */
 export type Actions =
-  AuthenticateAction
-  | AuthenticatedAction
-  | AuthenticatedErrorAction
-  | AuthenticatedSuccessAction
-  | AuthenticationErrorAction
-  | AuthenticationSuccessAction
-  | SignUpAction
-  | SignUpErrorAction
-  | SignUpSuccessAction;
+  Authenticate
+  | Authenticated
+  | AuthenticatedError
+  | AuthenticatedSuccess
+  | AuthenticationError
+  | AuthenticationSuccess
+  | SignUp
+  | SignUpError
+  | SignUpSuccess;

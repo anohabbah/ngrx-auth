@@ -5,7 +5,7 @@ import {Store} from '@ngrx/store';
 // rxjs
 import {Observable} from 'rxjs/Observable';
 // actions
-import {SignUpAction} from '../users.actions';
+import {SignUp} from '../users.actions';
 // reducers
 import {getSignUpError, isAuthenticated, isAuthenticationLoading, State} from '../../app.reducers';
 // models
@@ -127,6 +127,6 @@ export class SignUpComponent implements OnDestroy, OnInit {
     };
 
     // dispatch SignUpAction and pass in payload
-    this.store.dispatch(new SignUpAction(payload));
+    this.store.dispatch(new SignUp(payload));
   }
 }

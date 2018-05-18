@@ -11,13 +11,14 @@ import {User} from '../core/models/user';
 // import actions
 import {
   ActionTypes,
-  AuthenticatedErrorAction,
-  AuthenticatedSuccessAction, AuthenticationErrorAction,
-  AuthenticationSuccessAction,
-  SignOutErrorAction,
-  SignOutSuccessAction,
-  SignUpErrorAction,
-  SignUpSuccessAction
+  AuthenticatedError,
+  AuthenticatedSuccess,
+  AuthenticationError,
+  AuthenticationSuccess,
+  SignOutError,
+  SignOutSuccess,
+  SignUpError,
+  SignUpSuccess
 } from './users.actions';
 import {catchError, debounceTime, map, switchMap, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
@@ -47,14 +48,14 @@ export class UserEffects {
    * Authenticate user.
    */
   @Effect()
-  public authenticate = this.actions.pipe(
+  public authenticate: Observable<Action> = this.actions.pipe(
     ofType(ActionTypes.AUTHENTICATE),
     debounceTime(500),
     map(action => action.payload),
     switchMap(payload => {
       return this.authenticator.authenticate(payload.email, payload.password).pipe(
-        map(user => new AuthenticationSuccessAction({user: User})),
-        catchError(error => Observable.of(new AuthenticationErrorAction({error: error})))
+        map(user => new AuthenticationSuccess({user: User})),
+        catchError(error => Observable.of(new AuthenticationError({error: error})))
       );
     })
   );
@@ -68,8 +69,8 @@ export class UserEffects {
     .map(action => action.payload)
     .switchMap(payload => {
       return this.authenticator.authenticatedUser()
-        .map(user => new AuthenticatedSuccessAction({authenticated: (user !== null), user: User}))
-        .catch(error => Observable.of(new AuthenticatedErrorAction({error: error})));
+        .map(user => new AuthenticatedSuccess({authenticated: (user !== null), user: User}))
+        .catch(error => Observable.of(new AuthenticatedError({error: error})));
     });
 
   /**
@@ -82,8 +83,8 @@ export class UserEffects {
     .map(action => action.payload)
     .switchMap(payload => {
       return this.authenticator.create(payload.user)
-        .map(user => new SignUpSuccessAction({user: User}))
-        .catch(error => Observable.of(new SignUpErrorAction({error: error})));
+        .map(user => new SignUpSuccess({user: User}))
+        .catch(error => Observable.of(new SignUpError({error: error})));
     });
 
   /**
@@ -95,8 +96,8 @@ export class UserEffects {
     .map(action => action.payload)
     .switchMap(payload => {
       return this.authenticator.signout()
-        .map(value => new SignOutSuccessAction())
-        .catch(error => Observable.of(new SignOutErrorAction({error: error})));
+        .map(value => new SignOutSuccess())
+        .catch(error => Observable.of(new SignOutError({error: error})));
     });
 
   @Effect()

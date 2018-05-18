@@ -3,7 +3,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 // rxjs
 // actions
-import {SignOutAction} from '../users.actions';
+import {SignOut} from '../users.actions';
 // reducers
 import {State} from '../../app.reducers';
 import {Router} from '@angular/router';
@@ -39,7 +39,7 @@ export class SignOutComponent implements OnDestroy, OnInit {
    * Lifecycle hook that is called after data-bound properties of a directive are initialized.
    */
   ngOnInit() {
-    this.store.dispatch(new SignOutAction());
+    this.store.dispatch(new SignOut());
   }
 
   /**

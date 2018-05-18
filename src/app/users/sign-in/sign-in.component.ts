@@ -7,7 +7,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/takeWhile';
 // actions
-import {AuthenticateAction} from '../users.actions';
+import {Authenticate} from '../users.actions';
 // reducers
 import {getAuthenticationError, isAuthenticated, isAuthenticationLoading, State} from '../../app.reducers';
 import {Router} from '@angular/router';
@@ -129,6 +129,6 @@ export class SignInComponent implements OnDestroy, OnInit {
     };
 
     // dispatch AuthenticationAction and pass in payload
-    this.store.dispatch(new AuthenticateAction(payload));
+    this.store.dispatch(new Authenticate(payload));
   }
 }

@@ -8,7 +8,7 @@ import {getAuthenticatedUser, State} from '../../app.reducers';
 // models
 import {User} from '../../core/models/user';
 import {Router} from '@angular/router';
-import {SignOutAction} from '../users.actions';
+import {SignOut} from '../users.actions';
 
 /**
  * The user"s account.
@@ -52,7 +52,7 @@ export class MyAccountComponent implements OnInit {
    * @method home
    */
   public signOut() {
-    this.store.dispatch(new SignOutAction());
+    this.store.dispatch(new SignOut());
   }
 
 }
