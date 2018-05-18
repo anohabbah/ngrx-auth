@@ -64,41 +64,49 @@ export class UserEffects {
    * Determine if the user is authenticated.
    */
   @Effect()
-  public authenticated: Observable<Action> = this.actions
-    .ofType(ActionTypes.AUTHENTICATED)
-    .map(action => action.payload)
-    .switchMap(payload => {
-      return this.authenticator.authenticatedUser()
-        .map(user => new AuthenticatedSuccess({authenticated: (user !== null), user: User}))
-        .catch(error => Observable.of(new AuthenticatedError({error: error})));
-    });
+  public authenticated: Observable<Action> = this.actions.pipe(
+    ofType(ActionTypes.AUTHENTICATED),
+    map(action => action.payload),
+    switchMap(payload => {
+      return this.authenticator.authenticatedUser().pipe(
+        map(user => new AuthenticatedSuccess({authenticated: (user !== null), user: User})),
+        catchError(error => Observable.of(new AuthenticatedError({error: error})))
+      );
+    })
+  );
 
   /**
    * Create a new user.
    */
   @Effect()
-  public createUser: Observable<Action> = this.actions
-    .ofType(ActionTypes.SIGN_UP)
-    .debounceTime(500)
-    .map(action => action.payload)
-    .switchMap(payload => {
-      return this.authenticator.create(payload.user)
-        .map(user => new SignUpSuccess({user: User}))
-        .catch(error => Observable.of(new SignUpError({error: error})));
-    });
+  public createUser: Observable<Action> = this.actions.pipe(
+    ofType(ActionTypes.SIGN_UP),
+    debounceTime(500),
+    map(action => action.payload),
+    switchMap(payload => {
+      return this.authenticator.create(payload.user).pipe(
+        map(user => new SignUpSuccess({user: User})),
+        catchError(error => Observable.of(new SignUpError({error: error})))
+      );
+    })
+  );
 
   /**
    * Terminate user session.
    */
   @Effect()
-  public signOut: Observable<Action> = this.actions
-    .ofType(ActionTypes.SIGN_OUT)
-    .map(action => action.payload)
-    .switchMap(payload => {
-      return this.authenticator.signout()
-        .map(value => new SignOutSuccess())
-        .catch(error => Observable.of(new SignOutError({error: error})));
-    });
+  public signOut: Observable<Action> = this.actions.pipe(
+    ofType(ActionTypes.SIGN_OUT),
+    map(action => action.payload),
+    switchMap(
+      payload => {
+        return this.authenticator.signout().pipe(
+          map(value => new SignOutSuccess()),
+          catchError(error => Observable.of(new SignOutError({error: error})))
+        );
+      }
+    )
+  );
 
   @Effect()
   public loginRedirect = this.actions.pipe(
