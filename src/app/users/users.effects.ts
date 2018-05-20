@@ -11,12 +11,16 @@ import {User} from '../core/models/user';
 // import actions
 import {
   ActionTypes,
+  Authenticate,
+  Authenticated,
   AuthenticatedError,
   AuthenticatedSuccess,
   AuthenticationError,
   AuthenticationSuccess,
+  SignOut,
   SignOutError,
   SignOutSuccess,
+  SignUp,
   SignUpError,
   SignUpSuccess
 } from './users.actions';
@@ -48,13 +52,13 @@ export class UserEffects {
    * Authenticate user.
    */
   @Effect()
-  public authenticate: Observable<Action> = this.actions.pipe(
-    ofType(ActionTypes.AUTHENTICATE),
+  public authenticate$: Observable<Action> = this.actions$.pipe(
+    ofType<Authenticate>(ActionTypes.AUTHENTICATE),
     debounceTime(500),
-    map(action => action.payload),
+    map((action: Authenticate) => action.payload),
     switchMap(payload => {
       return this.authenticator.authenticate(payload.email, payload.password).pipe(
-        map(user => new AuthenticationSuccess({user: User})),
+        map((user: User) => new AuthenticationSuccess({user: user})),
         catchError(error => Observable.of(new AuthenticationError({error: error})))
       );
     })
@@ -64,12 +68,12 @@ export class UserEffects {
    * Determine if the user is authenticated.
    */
   @Effect()
-  public authenticated: Observable<Action> = this.actions.pipe(
-    ofType(ActionTypes.AUTHENTICATED),
-    map(action => action.payload),
+  public authenticated$: Observable<Action> = this.actions$.pipe(
+    ofType<Authenticated>(ActionTypes.AUTHENTICATED),
+    map((action: Authenticated) => action.payload),
     switchMap(payload => {
       return this.authenticator.authenticatedUser().pipe(
-        map(user => new AuthenticatedSuccess({authenticated: (user !== null), user: User})),
+        map((user: User) => new AuthenticatedSuccess({authenticated: (user !== null), user: user})),
         catchError(error => Observable.of(new AuthenticatedError({error: error})))
       );
     })
@@ -79,13 +83,15 @@ export class UserEffects {
    * Create a new user.
    */
   @Effect()
-  public createUser: Observable<Action> = this.actions.pipe(
-    ofType(ActionTypes.SIGN_UP),
+  public createUser$: Observable<Action> = this.actions$.pipe(
+    ofType<SignUp>(ActionTypes.SIGN_UP),
     debounceTime(500),
-    map(action => action.payload),
+    map((action: SignUp) => action.payload),
     switchMap(payload => {
       return this.authenticator.create(payload.user).pipe(
-        map(user => new SignUpSuccess({user: User})),
+        map((user: User) => {
+          return new SignUpSuccess({user: user});
+        }),
         catchError(error => Observable.of(new SignUpError({error: error})))
       );
     })
@@ -95,9 +101,9 @@ export class UserEffects {
    * Terminate user session.
    */
   @Effect()
-  public signOut: Observable<Action> = this.actions.pipe(
-    ofType(ActionTypes.SIGN_OUT),
-    map(action => action.payload),
+  public signOut$: Observable<Action> = this.actions$.pipe(
+    ofType<SignOut>(ActionTypes.SIGN_OUT),
+    map((action: SignOut) => action.payload),
     switchMap(
       payload => {
         return this.authenticator.signout().pipe(
@@ -108,8 +114,8 @@ export class UserEffects {
     )
   );
 
-  @Effect()
-  public loginRedirect = this.actions.pipe(
+  @Effect({ dispatch: false })
+  public loginRedirect$ = this.actions$.pipe(
     ofType(ActionTypes.LOGIN_REDIRECT),
     tap(authGuest => this.router.navigate(['/users/sign-in']))
   );
@@ -121,9 +127,8 @@ export class UserEffects {
    * @param {Router} router
    */
   constructor(
-    private actions: Actions,
+    private actions$: Actions,
     private authenticator: AuthenticatorService,
     private router: Router
-  ) {
-  }
+  ) {}
 }

@@ -10,7 +10,7 @@ import {Store, select} from '@ngrx/store';
 // reducers
 import {isAuthenticated, State} from '../app.reducers';
 import {map} from 'rxjs/operators';
-import * as authActions from '../users/users.actions';
+import {LoginRedirect} from '../users/users.actions';
 
 /**
  * Prevent unauthorized activating and loading of routes
@@ -34,7 +34,7 @@ export class AuthGuard implements CanActivate {
       select(isAuthenticated),
       map(authCheck => {
         if (!authCheck) {
-          this.store.dispatch(new authActions.LoginRedirect());
+          this.store.dispatch(new LoginRedirect());
           return false;
         }
 

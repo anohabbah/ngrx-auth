@@ -11,6 +11,7 @@ import {SignUpComponent} from './sign-up/sign-up.component';
 import {SignInComponent} from './sign-in/sign-in.component';
 import {SignOutComponent} from './sign-out/sign-out.component';
 
+import {AuthGuard} from '../shared/auth.guard';
 
 const components = [MyAccountComponent, SignUpComponent, SignInComponent, SignOutComponent];
 
@@ -28,7 +29,7 @@ const components = [MyAccountComponent, SignUpComponent, SignInComponent, SignOu
     ReactiveFormsModule,
     UsersRoutingModule
   ],
-  declarations: [...components]
+  declarations: [...components],
+  providers: [AuthGuard]
 })
-export class UsersModule {
-}
+export class UsersModule {}

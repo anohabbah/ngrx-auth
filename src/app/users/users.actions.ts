@@ -165,7 +165,10 @@ export class SignUpSuccess implements Action {
 }
 
 export class LoginRedirect implements Action {
-  public readonly type: ActionTypes.LOGIN_REDIRECT;
+  public readonly type: string = ActionTypes.LOGIN_REDIRECT;
+
+  constructor(public payload?: any) {
+  }
 }
 
 /**
@@ -181,4 +184,5 @@ export type Actions =
   | AuthenticationSuccess
   | SignUp
   | SignUpError
+  | LoginRedirect
   | SignUpSuccess;

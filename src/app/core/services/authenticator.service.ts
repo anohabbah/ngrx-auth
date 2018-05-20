@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from '../models/user';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 export const MOCK_USER = new User();
 MOCK_USER._id = '1';

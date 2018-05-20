@@ -19,8 +19,8 @@ import {storeFreeze} from 'ngrx-store-freeze';
  * This means our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
-  router: fromRouter.RouterReducerState<RouterStateUrl>;
-  users: users.State;
+  router: fromRouter.RouterReducerState<RouterStateUrl>,
+  users: users.State
 }
 
 /**

@@ -54,8 +54,8 @@ import {UserEffects} from './users/users.effects';
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
     StoreDevtoolsModule.instrument({
-      name: 'NgRx Authentication',
-      logOnly: environment.production,
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
     }),
 
     /**
