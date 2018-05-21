@@ -8,9 +8,9 @@ import {Observable} from 'rxjs/Observable';
 import {Store, select} from '@ngrx/store';
 
 // reducers
-import {isAuthenticated, State} from '../app.reducers';
+import {isAuthenticated, State} from '../reducers/index';
 import {map} from 'rxjs/operators';
-import {LoginRedirect} from '../users/users.actions';
+import {LoginRedirect} from '../users/actions/users.actions';
 
 /**
  * Prevent unauthorized activating and loading of routes

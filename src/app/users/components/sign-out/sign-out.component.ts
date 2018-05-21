@@ -3,9 +3,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 // rxjs
 // actions
-import {SignOut} from '../users.actions';
+import {SignOut} from '../../actions/users.actions';
 // reducers
-import {State} from '../../app.reducers';
+import {State} from '../../../reducers/index';
 import {Router} from '@angular/router';
 
 @Component({

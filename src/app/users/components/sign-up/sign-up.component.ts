@@ -1,3 +1,4 @@
+import {Router} from '@angular/router';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 // @ngrx
@@ -5,12 +6,11 @@ import {Store} from '@ngrx/store';
 // rxjs
 import {Observable} from 'rxjs/Observable';
 // actions
-import {SignUp} from '../users.actions';
+import {SignUp} from '../../actions/users.actions';
 // reducers
-import {getSignUpError, isAuthenticated, isAuthenticationLoading, State} from '../../app.reducers';
+import {getSignUpError, isAuthenticated, isAuthenticationLoading, State} from '../../../reducers/index';
 // models
-import {User} from '../../core/models/user';
-import {Router} from '@angular/router';
+import {User} from '../../../core/models/user';
 
 /**
  * /users/sign-up

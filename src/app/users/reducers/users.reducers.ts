@@ -1,7 +1,7 @@
 // import actions
-import {Actions, ActionTypes} from './users.actions';
+import {Actions, ActionTypes} from '../actions/users.actions';
 // import models
-import {User} from '../core/models/user';
+import {User} from '../../core/models/user';
 
 /**
  * The state.

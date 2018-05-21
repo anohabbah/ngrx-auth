@@ -1,5 +1,5 @@
 // import type function
-import {User} from '../core/models/user';
+import {User} from '../../core/models/user';
 import {Action} from '@ngrx/store';
 
 // import models

@@ -1,5 +1,10 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import {BrowserModule} from '@angular/platform-browser';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {StoreRouterConnectingModule, RouterStateSerializer} from '@ngrx/router-store';
 
 import {AppRoutingModule} from './app-routing.module';
 
@@ -7,14 +12,11 @@ import {AuthenticatorService} from './core/services/authenticator.service';
 
 import {AppComponent} from './app.component';
 import {NotFoundComponent} from './not-found/not-found.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {StoreModule} from '@ngrx/store';
-import {StoreRouterConnectingModule} from '@ngrx/router-store';
-import {metaReducers, reducers} from './app.reducers';
-import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+
+import {metaReducers, reducers} from './reducers';
+import {UserEffects} from './users/effects/users.effects';
 import {environment} from '../environments/environment';
-import {EffectsModule} from '@ngrx/effects';
-import {UserEffects} from './users/users.effects';
+import {CustomRouterStateSerializer} from './shared/utils';
 
 
 @NgModule({
@@ -67,7 +69,10 @@ import {UserEffects} from './users/users.effects';
      */
     EffectsModule.forRoot([UserEffects]),
   ],
-  providers: [AuthenticatorService],
+  providers: [
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
+    AuthenticatorService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

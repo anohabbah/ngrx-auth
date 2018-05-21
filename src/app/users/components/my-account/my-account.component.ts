@@ -4,11 +4,11 @@ import {Store} from '@ngrx/store';
 // rxjs
 import {Observable} from 'rxjs/Observable';
 // reducers
-import {getAuthenticatedUser, State} from '../../app.reducers';
+import {getAuthenticatedUser, State} from '../../../reducers/index';
 // models
-import {User} from '../../core/models/user';
+import {User} from '../../../core/models/user';
 import {Router} from '@angular/router';
-import {SignOut} from '../users.actions';
+import {SignOut} from '../../actions/users.actions';
 
 /**
  * The user"s account.

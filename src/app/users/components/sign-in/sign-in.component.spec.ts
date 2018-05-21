@@ -8,10 +8,10 @@ import { Store, StoreModule } from "@ngrx/store";
 import { go } from "@ngrx/router-store";
 
 // reducers
-import { reducer } from "../../app.reducers";
+import { reducer } from "../../../reducers/index";
 
 // models
-import { User } from "../../core/models/user";
+import { User } from "../../../core/models/user";
 
 // services
 import { MOCK_USER } from "../../core/services/user.service";

@@ -7,9 +7,9 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/takeWhile';
 // actions
-import {Authenticate} from '../users.actions';
+import {Authenticate} from '../../actions/users.actions';
 // reducers
-import {getAuthenticationError, isAuthenticated, isAuthenticationLoading, State} from '../../app.reducers';
+import {getAuthenticationError, isAuthenticated, isAuthenticationLoading, State} from '../../../reducers/index';
 import {Router} from '@angular/router';
 
 /**

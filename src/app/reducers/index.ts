@@ -3,15 +3,15 @@ import {createSelector} from 'reselect';
 import {ActionReducer, ActionReducerMap, createFeatureSelector, MetaReducer} from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
 // environment
-import {environment} from '../environments/environment';
-import {RouterStateUrl} from './shared/utils';
+import {environment} from '../../environments/environment';
+import {RouterStateUrl} from '../shared/utils';
 /**
  * Every reducer module"s default export is the reducer function itself. In
  * addition, each module should export a type or interface that describes
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
-import * as users from './users/users.reducers';
+import * as users from '../users/reducers/users.reducers';
 import {storeFreeze} from 'ngrx-store-freeze';
 
 /**

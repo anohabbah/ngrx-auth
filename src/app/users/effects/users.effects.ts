@@ -5,9 +5,9 @@ import {Action} from '@ngrx/store';
 // import rxjs
 import {Observable} from 'rxjs/Observable';
 // import services
-import {AuthenticatorService} from '../core/services/authenticator.service';
+import {AuthenticatorService} from '../../core/services/authenticator.service';
 // import models
-import {User} from '../core/models/user';
+import {User} from '../../core/models/user';
 // import actions
 import {
   ActionTypes,
@@ -23,7 +23,7 @@ import {
   SignUp,
   SignUpError,
   SignUpSuccess
-} from './users.actions';
+} from '../actions/users.actions';
 import {catchError, debounceTime, map, switchMap, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 
@@ -62,6 +62,12 @@ export class UserEffects {
         catchError(error => Observable.of(new AuthenticationError({error: error})))
       );
     })
+  );
+
+  @Effect({ dispatch: false })
+  authenticateSuccess$: Observable<Action> = this.actions$.pipe(
+    ofType(ActionTypes.AUTHENTICATE_SUCCESS),
+    tap(() => this.router.navigate(['/']))
   );
 
   /**

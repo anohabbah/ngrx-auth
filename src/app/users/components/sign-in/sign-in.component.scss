@@ -1,6 +1,5 @@
 @import "~@angular/material/theming";
-@import "~@angular/material/theming";
-@import "../../../sass/mixins";
+@import "../../../../sass/mixins";
 
 :host {
   .flex-container {
@@ -45,8 +44,7 @@
         height: 64px;
         width: 64px;
         margin: 48px auto;
-        background: url("http://placehold.it/64x64");
-        background-size: contain;
+        background: url("http://placehold.it/64x64") contain;
         @include retina {
           background: url("http://placehold.it/128x128") 64px/64px;
         }

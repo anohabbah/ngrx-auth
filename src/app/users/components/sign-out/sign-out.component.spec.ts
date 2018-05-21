@@ -1,21 +1,21 @@
 /* tslint:disable:no-unused-variable */
-import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { DebugElement, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { StoreModule } from "@ngrx/store";
+import { By } from "@angular/platform-browser";
+import { Router } from "@angular/router";
+
+// import ngrx
+import { Store, StoreModule } from "@ngrx/store";
 
 // reducers
-import { reducer } from "../../app.reducers";
+import { reducer } from "../../../reducers/index";
 
-// services
-import { UserService } from "../../core/services/user.service";
+// test this component
+import { SignOutComponent } from "./sign-out.component";
 
-// this component to test
-import { MyAccountComponent } from "./my-account.component";
-
-describe("MyAccountComponent", () => {
-
-  let component: MyAccountComponent;
-  let fixture: ComponentFixture<MyAccountComponent>;
+describe("Component: Signout", () => {
+  let component: SignOutComponent;
+  let fixture: ComponentFixture<SignOutComponent>;
 
   beforeEach(async(() => {
     // refine the test module by declaring the test component
@@ -24,7 +24,7 @@ describe("MyAccountComponent", () => {
         StoreModule.provideStore(reducer)
       ],
       declarations: [
-        MyAccountComponent
+        SignOutComponent
       ],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA
@@ -33,7 +33,7 @@ describe("MyAccountComponent", () => {
     .compileComponents();
 
     // create component and test fixture
-    fixture = TestBed.createComponent(MyAccountComponent);
+    fixture = TestBed.createComponent(SignOutComponent);
 
     // get test component from the fixture
     component = fixture.componentInstance;
