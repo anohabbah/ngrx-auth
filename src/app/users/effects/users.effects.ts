@@ -5,7 +5,7 @@ import {Action} from '@ngrx/store';
 // import rxjs
 import {Observable} from 'rxjs/Observable';
 // import services
-import {AuthenticatorService} from '../../core/services/authenticator.service';
+import {AuthenticatorService} from '../services/authenticator.service';
 // import models
 import {User} from '../../core/models/user';
 // import actions

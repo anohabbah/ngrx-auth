@@ -8,7 +8,7 @@ import {StoreRouterConnectingModule, RouterStateSerializer} from '@ngrx/router-s
 
 import {AppRoutingModule} from './app-routing.module';
 
-import {AuthenticatorService} from './core/services/authenticator.service';
+import {AuthenticatorService} from './users/services/authenticator.service';
 
 import {AppComponent} from './app.component';
 import {NotFoundComponent} from './not-found/not-found.component';
